@@ -8,7 +8,7 @@ namespace TestTask.API.Tests;
 public class PurchaseTests : BaseTest
 {
     private const int ItemCost = 100;
-    private const int MaxPurchasableItemCount = 2;
+    private const int MaxPurchasableItemCount = 5;
     private const int InitialUserBalance = ItemCost * MaxPurchasableItemCount;
 
     protected override async Task SetupBase()
