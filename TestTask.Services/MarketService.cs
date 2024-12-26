@@ -32,7 +32,8 @@ public class MarketService
         await _testDbContext.UserItems.AddAsync(new UserItem
         {
             UserId = userId,
-            ItemId = itemId
+            ItemId = itemId,
+            PurchaseDate = DateTime.UtcNow
         });
 
         await _testDbContext.SaveChangesAsync();
