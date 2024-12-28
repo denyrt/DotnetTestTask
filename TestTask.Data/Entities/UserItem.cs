@@ -5,6 +5,9 @@ namespace TestTask.Data.Entities;
 public class UserItem
 {
     public int Id { get; set; }
+
+    public DateTime PurchaseDate { get; set; }
+
     public int UserId { get; set; }
     [ForeignKey(nameof(UserId))] public User? User { get; set; }
 

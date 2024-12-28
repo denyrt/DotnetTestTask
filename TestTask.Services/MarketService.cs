@@ -32,9 +32,41 @@ public class MarketService
         await _testDbContext.UserItems.AddAsync(new UserItem
         {
             UserId = userId,
-            ItemId = itemId
+            ItemId = itemId,
+            PurchaseDate = DateTime.UtcNow
         });
 
         await _testDbContext.SaveChangesAsync();
+    }
+
+    public async Task<IEnumerable<MostPopularItemRecord>> MostPopularItemsAsync()
+    {
+        const int TAKEN_ITEMS_PER_YEAR = 3;
+
+        var groups = _testDbContext.UserItems
+            .AsNoTracking()
+            .Include(x => x.Item)
+            .GroupBy(x => new
+            {
+                x.PurchaseDate.Date,
+                x.UserId,
+                ItemName = x.Item!.Name
+            })
+            .Select(g => new
+            {
+                g.Key.Date.Year,
+                g.Key.ItemName,
+                BoughtNumber = g.Count()
+            });
+
+        var items = await groups
+            .GroupBy(x => x.Year)
+            .OrderByDescending(x => x.Key)
+            .Select(g => g.OrderByDescending(x => x.BoughtNumber).Take(TAKEN_ITEMS_PER_YEAR))
+            .ToArrayAsync();
+
+        return items
+            .SelectMany(x => x)
+            .Select(x => new MostPopularItemRecord(x.Year, x.ItemName, x.BoughtNumber));
     }
 }
