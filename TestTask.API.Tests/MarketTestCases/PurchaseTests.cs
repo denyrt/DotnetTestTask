@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using TestTask.API.Controllers;
 using TestTask.Data.Entities;
 
-namespace TestTask.API.Tests;
+namespace TestTask.API.Tests.MarketTestCases;
 
 // First test task: Ensure the tests in this class are successful
 public class PurchaseTests : BaseTest
