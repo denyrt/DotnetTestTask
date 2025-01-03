@@ -4,8 +4,6 @@
 ####  Fix existing unit tests:
 
 - Please fix the issue in the `TestTask.API.Tests.PurchaseTests.cs.BuyAsync_ShouldHandleConcurrentPurchases` test without modifying the test itself.
- 
-> ✅ _Fixed by changing `MaxPurchasableItemCount` value to `5`. Test method itself wasn't touched._
 
 #### 'Report' Task:
 Enhance an existing application by modifying its data models and creating an API endpoint to generate a specific report.

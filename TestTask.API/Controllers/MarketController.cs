@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using TestTask.Services;
 
@@ -6,14 +5,9 @@ namespace TestTask.API.Controllers;
 
 [ApiController]
 [Route("market")]
-public class MarketController : ControllerBase
+public class MarketController(IMarketService marketService) : ControllerBase
 {
-    private readonly MarketService _marketService;
-
-    public MarketController(MarketService marketService)
-    {
-        _marketService = marketService;
-    }
+    private readonly IMarketService _marketService = marketService;
 
     [HttpPost]
     public async Task BuyAsync(int userId, int itemId)
@@ -24,7 +18,7 @@ public class MarketController : ControllerBase
     [HttpGet("most-popular")]
     public async Task<ActionResult<MostPopularItemRecord[]>> GetMostPopularItems()
     {
-        IEnumerable<MostPopularItemRecord> items = await _marketService.MostPopularItemsAsync();
+        IEnumerable<MostPopularItemRecord> items = await _marketService.GetMostPopularItemsAsync(HttpContext.RequestAborted);
         return Ok(items);
     }
 }

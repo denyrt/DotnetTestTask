@@ -40,7 +40,7 @@ namespace TestTask.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Items");
+                    b.ToTable("Items", (string)null);
                 });
 
             modelBuilder.Entity("TestTask.Data.Entities.User", b =>
@@ -61,7 +61,7 @@ namespace TestTask.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("TestTask.Data.Entities.UserItem", b =>
@@ -87,7 +87,7 @@ namespace TestTask.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserItems");
+                    b.ToTable("UserItems", (string)null);
                 });
 
             modelBuilder.Entity("TestTask.Data.Entities.UserItem", b =>
